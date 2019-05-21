@@ -6,7 +6,7 @@ Basic Message List to practice HTML, CSS, and JS.
 
 ## Basic functionality:
 
-- HTML file tha loads CSS and JS files
+- HTML file that loads CSS and JS files
 - Navbar with home, about, etc
 - Input form to write a message
 - Stringified JSON of initial messages

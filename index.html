@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <title>Out Loud</title>
+        <!-- <link rel="stylesheet" href="index.css" /> -->
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    </head>
+
+    <body onload="loadMessages()">
+        <div id="container">
+            <nav id="topnav"></nav>
+            <div>
+                <h1>Out Loud</h1>
+                <h5>Tell the world.</h5>
+            </div>
+            <button onclick="clearMessages()">
+                I know nothing
+            </button>
+            <div id="message-container">
+                <div id="message-submit-container">
+                    <form id="message-form">
+                        <label for="content">Message Content</label>
+                        <textarea id="message-content" name="content" placeholder="Spill the beans..."></textarea>
+                        <input type="submit" value="Post!">
+                    </form>
+                </div>
+                <div id="message-display-container"></div>
+            </div>
+            <script src="common_script.js"></script>
+            <script src="index.js"></script>
+        </div>
+    </body>
+
+</html>

@@ -3,7 +3,8 @@
 
     <head>
         <title>Out Loud</title>
-        <!-- <link rel="stylesheet" href="index.css" /> -->
+        <link rel="stylesheet" href="index.css" />
+        <link rel="stylesheet" href="common_css.css" />
         <meta name="viewport" content="width=device-width, initial-scale=1">
     </head>
 
@@ -12,21 +13,25 @@
             <nav id="topnav"></nav>
             <div>
                 <h1>Out Loud</h1>
-                <h5>Tell the world.</h5>
+                <h5>Have something on your mind? Tell the world. Anonymously.</h5>
             </div>
-            <button onclick="clearMessages()">
-                I know nothing
-            </button>
             <div id="message-container">
                 <div id="message-submit-container">
                     <form id="message-form">
-                        <label for="content">Message Content</label>
+                        <label for="content">Share a message</label>
                         <textarea id="message-content" name="content" placeholder="Spill the beans..."></textarea>
+                        <input type="button" value="Clear" onclick="clearTextArea()">
                         <input type="submit" value="Post!">
                     </form>
                 </div>
                 <div id="message-display-container"></div>
             </div>
+            <div id="nuke">
+                <button onclick="clearMessages()">
+                    I know nothing
+                </button>
+            </div>
+
             <script src="common_script.js"></script>
             <script src="index.js"></script>
         </div>

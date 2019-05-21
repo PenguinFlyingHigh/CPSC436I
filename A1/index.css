@@ -1,0 +1,37 @@
+.timestamp-container {
+    font-size: 10px
+}
+
+.message-container {
+    text-align: center;
+    border-style: solid;
+    border-width: 1px;
+    padding: 10px;
+    margin: 3px;
+}
+
+#nuke {
+    text-align: right;
+    margin-right: 3px;
+}
+
+#message-submit-container {
+    text-align: center;
+    margin: 3px;
+    padding: 10px;
+    border-style: solid;
+    border-width: 1px;
+}
+
+#message-form {
+    display: inline-flex;
+    flex-direction: column;
+}
+
+#message-content {
+    background-color: azure;
+    width: 300px;
+    height: 100px;
+    resize: none;
+    margin-top: 3px;
+}

@@ -12,9 +12,12 @@ Basic Message List to practice HTML, CSS, and JS.
 - Stringified JSON of initial messages
 - List of messages to display
 - Button to clear list
+- Button to clear message box
 - Styling
-- Bonus!
 
 ## Bonus functionality:
 
 - Dogs, so many dogs.
+- Empty form cannot be submitted.
+- Pretty colours and styling.
+- Timestamp on messages.

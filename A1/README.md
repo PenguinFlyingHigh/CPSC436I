@@ -2,7 +2,7 @@
 
 Basic Message List to practice HTML, CSS, and JS.
 
-[Assignment PDF](http://blogs.ubc.ca/cpsc436i2019s/files/2019/05/Project-Progress-.pdf)
+[Assignment PDF](http://blogs.ubc.ca/cpsc436i2019s/files/2019/05/Assignment-1.pdf)
 
 ## Basic functionality:
 

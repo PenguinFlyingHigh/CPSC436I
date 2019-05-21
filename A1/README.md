@@ -2,11 +2,11 @@
 
 Basic Message List to practice HTML, CSS, and JS.
 
-[Assignment PDF](http://blogs.ubc.ca/cpsc436i2019s/files/2019/05/Project-Progress-.pdf)
+[Assignment PDF](http://blogs.ubc.ca/cpsc436i2019s/files/2019/05/Assignment-1.pdf)
 
 ## Basic functionality:
 
-- HTML file tha loads CSS and JS files
+- HTML file that loads CSS and JS files
 - Navbar with home, about, etc
 - Input form to write a message
 - Stringified JSON of initial messages

@@ -21,3 +21,4 @@ Basic Message List to practice HTML, CSS, and JS.
 - Empty form cannot be submitted.
 - Pretty colours and styling.
 - Timestamp on messages.
+- Hide messages individually.

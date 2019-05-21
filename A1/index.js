@@ -1,6 +1,7 @@
 let messages_json = "[{\"message\":\"This is the first test message!\",\"timestamp\":\"Tue May 21 2019 00:10:52 GMT-0700 (Pacific Daylight Time)\"},{\"message\":\"Would you look at that, here's another!\",\"timestamp\":\"Tue May 21 2019 03:15:52 GMT-0700 (Pacific Daylight Time)\"},{\"message\":\"Three's a crowd!\",\"timestamp\":\"Tue May 21 2019 09:16:52 GMT-0700 (Pacific Daylight Time)\"}]"
 let messages = JSON.parse(messages_json);
 let doc = document.getElementById("message-display-container");
+let id = 0;
 
 loadMessages = () => {
     messages.forEach(message_obj => {
@@ -35,15 +36,26 @@ document.getElementById("message-form").onsubmit = () => {
 };
 
 addMessage = (message) => {
+    let hide_message_button = document.createElement('button');
+    hide_message_button.className = "hide-message-btn"
+    hide_message_button.innerHTML = "Begone!";
+    hide_message_button.id = id;
+    hide_message_button.onclick = () => {
+        let msg = document.getElementById("message" + hide_message_button.id);
+        msg.hidden = true;
+    };
+
     let timestamp_container = document.createElement('div');
     timestamp_container.className = "timestamp-container";
     timestamp_container.innerHTML = message.timestamp;
+    timestamp_container.appendChild(hide_message_button);
 
     let newMessageContainer = document.createElement('div');
-    newMessageContainer.id = messages.length;
+    newMessageContainer.id = "message" + id;
     newMessageContainer.className = "message-container";
     newMessageContainer.innerHTML = message.message;
     newMessageContainer.appendChild(timestamp_container)
 
+    id++;
     doc.appendChild(newMessageContainer);
 }

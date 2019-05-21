@@ -1,13 +1,23 @@
 .timestamp-container {
-    font-size: 10px
+    font-size: 11px;
+    text-align: right;
 }
 
 .message-container {
+    font-size: 120%;
     text-align: center;
     border-style: solid;
     border-width: 1px;
     padding: 10px;
     margin: 3px;
+}
+
+.hide-message-btn {
+    float: right;
+    background-color: pink;
+    border-radius: 12px;
+    font-size: 8px;
+    margin-left: 10px;
 }
 
 #nuke {
@@ -29,6 +39,7 @@
 }
 
 #message-content {
+    font-size: 110%;
     background-color: azure;
     width: 300px;
     height: 100px;

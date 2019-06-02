@@ -5,11 +5,15 @@ import { addMessage } from "../actions";
 class MessageInputBox extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { message: "" };
+    this.state = { message: "", name: "" };
   }
 
-  handleChange = e => {
+  handleMessageChange = e => {
     this.setState({ message: e.target.value });
+  };
+
+  handleNameChange = e => {
+    this.setState({ name: e.target.value });
   };
 
   handleSubmit = e => {
@@ -19,10 +23,23 @@ class MessageInputBox extends React.Component {
       return;
     }
 
-    alert("Submitted: " + this.state.message);
-    this.props.addMessage(this.state.message);
+    if (this.state.name === "") {
+      alert("You forgot your name?");
+      return;
+    }
+
+    alert("Did you know that this is what you wrote: " + this.state.message);
+
+    let newMessage = {
+      name: this.state.name,
+      message: this.state.message
+    };
+
+    this.props.addMessage(newMessage);
+
     this.setState({
-      message: ""
+      message: "",
+      name: ""
     });
   };
 
@@ -31,11 +48,18 @@ class MessageInputBox extends React.Component {
       <form onSubmit={this.handleSubmit} className="message-submit-container ">
         <label className="message-form">
           Share a message:
+          <input
+            type="text"
+            className="form-name"
+            placeholder="Name?"
+            value={this.state.name}
+            onChange={this.handleNameChange}
+          />
           <textarea
             className="message-content"
             placeholder="Spill the beans..."
             value={this.state.message}
-            onChange={this.handleChange}
+            onChange={this.handleMessageChange}
           />
           <input type="submit" value="Post" />
         </label>

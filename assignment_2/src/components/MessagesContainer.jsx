@@ -14,7 +14,7 @@ class MessagesContainer extends React.Component {
     return (
       <div>
         {messages.map((item, i) => (
-          <Message key={i} message={item} />
+          <Message key={i} messageObj={item} />
         ))}
       </div>
     );

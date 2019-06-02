@@ -6,19 +6,15 @@ React Redux Message List.
 
 ## Basic functionality:
 
-- HTML file that loads CSS and JS files
-- Navbar with home, about, etc
+- React and Redux
 - Input form to write a message
-- Stringified JSON of initial messages
-- List of messages to display
-- Button to clear list
-- Button to clear message box
-- Styling
+- Preloaded messages in reducer
+- Displays initial list of messages
+- Basic styling
 
 ## Bonus functionality:
 
-- Dogs, so many dogs.
-- Empty form cannot be submitted.
-- Pretty colours and styling.
-- Timestamp on messages.
-- Hide messages individually.
+- Selected box is highlight in red border
+- Selected box displays message of input name
+- Additional name input on form
+- Alert on form validation and submission

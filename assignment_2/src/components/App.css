@@ -10,6 +10,11 @@
   background-image: linear-gradient(beige, aquamarine);
 }
 
+.highlighted {
+  border-color: red;
+  border-width: 2px !important;
+}
+
 .message-submit-container {
   text-align: center;
   margin: 3px;

@@ -1,4 +1,6 @@
 import React from "react";
+import { connect } from "react-redux";
+import { addMessage } from "../actions";
 
 class MessageInputBox extends React.Component {
   constructor(props) {
@@ -11,16 +13,17 @@ class MessageInputBox extends React.Component {
   };
 
   handleSubmit = e => {
+    e.preventDefault();
     if (this.state.message === "") {
       alert("You really gotta say something...");
       return;
     }
 
     alert("Submitted: " + this.state.message);
+    this.props.addMessage(this.state.message);
     this.setState({
       message: ""
     });
-    e.preventDefault();
   };
 
   render() {
@@ -41,4 +44,11 @@ class MessageInputBox extends React.Component {
   }
 }
 
-export default MessageInputBox;
+const mapStateToProps = state => {
+  return { messages: state.messages };
+};
+
+export default connect(
+  mapStateToProps,
+  { addMessage }
+)(MessageInputBox);

@@ -1,7 +1,7 @@
 import React from "react";
 import "./App.css";
 import MessageInputBox from "./MessageInputBox";
-import MessageDisplayBox from "./MessageDisplayBox";
+import MessagesContainer from "./MessagesContainer";
 
 function App() {
   return (
@@ -12,7 +12,7 @@ function App() {
         implemented with REACT + REDUX!
       </h5>
       <MessageInputBox />
-      <MessageDisplayBox />
+      <MessagesContainer />
     </div>
   );
 }

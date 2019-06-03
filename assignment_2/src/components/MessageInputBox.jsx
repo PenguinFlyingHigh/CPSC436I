@@ -31,6 +31,7 @@ class MessageInputBox extends React.Component {
     alert("Did you know that this is what you wrote: " + this.state.message);
 
     let newMessage = {
+      timestamp: new Date() + "",
       name: this.state.name,
       message: this.state.message
     };

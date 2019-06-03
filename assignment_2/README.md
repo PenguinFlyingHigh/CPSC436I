@@ -18,3 +18,4 @@ React Redux Message List.
 - Selected box displays message of input name
 - Additional name input on form
 - Alert on form validation and submission
+- Add timestamp information

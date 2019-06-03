@@ -3,15 +3,18 @@ import { combineReducers } from "redux";
 const initial_message = [
   {
     message: "This is one of those awesome messages.",
-    name: "Jimmy"
+    name: "Jimmy",
+    timestamp: "Tue May 21 2019 00:10:52 GMT-0700 (Pacific Daylight Time)"
   },
   {
     message: "Oh look, another awesome message.",
-    name: "Queen"
+    name: "Queen",
+    timestamp: "Tue May 21 2019 00:10:52 GMT-0700 (Pacific Daylight Time)"
   },
   {
     message: "Funny.",
-    name: "Not"
+    name: "Not",
+    timestamp: "Tue May 21 2019 00:10:52 GMT-0700 (Pacific Daylight Time)"
   }
 ];
 

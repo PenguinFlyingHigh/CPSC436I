@@ -19,3 +19,4 @@ React Redux Message List.
 - Additional name input on form
 - Alert on form validation and submission
 - Add timestamp information
+- Infinite dogs (thanks to react-infinite-scroller)

@@ -1,6 +1,7 @@
 import React from "react";
 import Message from "./Message.jsx";
 import { connect } from "react-redux";
+import { getMessages } from "../actions";
 
 class MessagesContainer extends React.Component {
   constructor(props) {
@@ -8,8 +9,20 @@ class MessagesContainer extends React.Component {
     this.state = {};
   }
 
+  componentWillMount() {
+    this.props.getMessages();
+  }
+
   render() {
-    const messages = this.props.messages;
+    const { error, loading, messages } = this.props;
+
+    if (error) {
+      return <div>Error! {error.message}</div>;
+    }
+
+    if (loading) {
+      return <div>Loading...</div>;
+    }
 
     return (
       <div>
@@ -21,8 +34,13 @@ class MessagesContainer extends React.Component {
   }
 }
 
-const mapStateToProps = state => {
-  return { messages: state.messages };
-};
+const mapStateToProps = state => ({
+  messages: state.messages.messages,
+  loading: state.messages.loading,
+  error: state.messages.error
+});
 
-export default connect(mapStateToProps)(MessagesContainer);
+export default connect(
+  mapStateToProps,
+  { getMessages }
+)(MessagesContainer);

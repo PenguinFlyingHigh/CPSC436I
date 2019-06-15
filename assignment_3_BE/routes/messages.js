@@ -49,10 +49,10 @@ router.put('/:uuid', function(req, res, next) {
     let newMessage = req.body;
     newMessage.uuid = uuid;
     messages[index] = newMessage;
-    res.json(messages[index]);
+    res.json(messages[index]).send();
+  } else {
+    res.status(404).send();
   }
-
-  res.status(404).send();
 });
 
 router.delete('/:uuid', function(req, res, next) {
@@ -61,9 +61,10 @@ router.delete('/:uuid', function(req, res, next) {
   if (index !== -1) {
     messages.splice(index, 1);
     res.status(204).send();
+  } else {
+    res.status(404).send();
   }
 
-  res.status(404).send();
 });
 
 module.exports = router;

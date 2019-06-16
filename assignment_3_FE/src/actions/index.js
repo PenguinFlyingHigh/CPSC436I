@@ -2,6 +2,7 @@ export const FETCH_MESSAGES_BEGIN = 'FETCH_MESSAGES_BEGIN';
 export const FETCH_MESSAGES_SUCCESS = 'FETCH_MESSAGES_SUCCESS';
 export const DELETE_MESSAGE_COMPLETE = 'DELETE_MESSAGE_COMPLETE';
 export const FETCH_MESSAGES_FAILURE = 'FETCH_MESSAGES_FAILURE';
+export const NUKE_MESSAGE_COMPLETE = 'NUKE_MESSAGE_COMPLETE';
 
 const sleep = milliseconds => {
   //artificially sleep so we can see that beautiful spinner
@@ -22,7 +23,6 @@ export const addMessage = message => {
       .then(json => {
         sleep(500).then(() => {
           dispatch(fetchMessagesSuccess(json));
-          return json;
         });
       })
       .catch(error => dispatch(fetchMessagesFailure(error)));
@@ -36,7 +36,6 @@ export const getMessages = () => {
       .then(res => res.json())
       .then(json => {
         dispatch(fetchMessagesSuccess(json));
-        return json;
       })
       .catch(error => dispatch(fetchMessagesFailure(error)));
   };
@@ -49,6 +48,17 @@ export const deleteMessage = uuid => {
       method: 'DELETE'
     })
       .then(dispatch(deleteMessageComplete(uuid)))
+      .catch(error => dispatch(fetchMessagesFailure(error)));
+  };
+};
+
+export const nukeMessages = () => {
+  return async dispatch => {
+    dispatch(fetchMessagesBegin());
+    return fetch('http://localhost:3000/messages', {
+      method: 'DELETE'
+    })
+      .then(dispatch(nukeMessagesComplete()))
       .catch(error => dispatch(fetchMessagesFailure(error)));
   };
 };
@@ -74,6 +84,12 @@ export const deleteMessageComplete = uuid => {
     payload: {
       uuid
     }
+  };
+};
+
+export const nukeMessagesComplete = () => {
+  return {
+    type: NUKE_MESSAGE_COMPLETE
   };
 };
 

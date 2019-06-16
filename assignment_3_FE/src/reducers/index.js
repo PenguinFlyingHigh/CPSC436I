@@ -3,7 +3,8 @@ import {
   FETCH_MESSAGES_BEGIN,
   DELETE_MESSAGE_COMPLETE,
   FETCH_MESSAGES_SUCCESS,
-  FETCH_MESSAGES_FAILURE
+  FETCH_MESSAGES_FAILURE,
+  NUKE_MESSAGE_COMPLETE
 } from '../actions/index.js';
 
 const initialState = {
@@ -29,6 +30,14 @@ const messageReducer = (state = initialState, action) => {
         messages: state.messages.filter(
           message => message.uuid !== action.payload.uuid
         )
+      };
+
+    case NUKE_MESSAGE_COMPLETE:
+      return {
+        ...state,
+        loading: false,
+        error: null,
+        messages: []
       };
 
     case FETCH_MESSAGES_SUCCESS:

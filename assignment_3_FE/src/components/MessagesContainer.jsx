@@ -1,7 +1,7 @@
 import React from 'react';
 import Message from './Message.jsx';
 import { connect } from 'react-redux';
-import { getMessages } from '../actions';
+import { getMessages, nukeMessages } from '../actions';
 import Loader from 'react-loader-spinner';
 
 class MessagesContainer extends React.Component {
@@ -13,6 +13,10 @@ class MessagesContainer extends React.Component {
   componentWillMount() {
     this.props.getMessages();
   }
+
+  handleClick = () => {
+    this.props.nukeMessages();
+  };
 
   render() {
     const { error, loading, messages } = this.props;
@@ -29,6 +33,7 @@ class MessagesContainer extends React.Component {
 
     return (
       <div>
+        <button onClick={this.handleClick}>Don't click this</button>
         {messages.map((item, i) => (
           <Message key={item.uuid} messageObj={item} />
         ))}
@@ -45,5 +50,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { getMessages }
+  { getMessages, nukeMessages }
 )(MessagesContainer);

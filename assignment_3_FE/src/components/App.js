@@ -14,7 +14,7 @@ function App() {
       </h5>
       <MessageInputBox />
       <MessagesContainer />
-      {/* <MoreDogs /> */}
+      <MoreDogs />
     </div>
   );
 }

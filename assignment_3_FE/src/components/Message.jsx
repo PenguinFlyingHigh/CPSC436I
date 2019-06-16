@@ -70,8 +70,8 @@ class Message extends React.Component {
           <h2>{this.props.messageObj.message}</h2>
           <MessageDropdown messageObj={this.props.messageObj} />
           <div>
-            <button onClick={this.handleClick}>Hide</button>
             <button onClick={this.handleDeleteClick}>Delete</button>
+            <button onClick={this.handleClick}>Close</button>
             <button onClick={this.handleEditClick}>Edit</button>
           </div>
           <form

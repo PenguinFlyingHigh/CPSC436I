@@ -1,6 +1,5 @@
 import { combineReducers } from "redux";
 import {
-  ADD_NEW_MESSAGE,
   FETCH_MESSAGES_BEGIN,
   FETCH_MESSAGES_SUCCESS,
   FETCH_MESSAGES_FAILURE
@@ -14,14 +13,6 @@ const initialState = {
 
 const messageReducer = (state = initialState, action) => {
   switch (action.type) {
-    case ADD_NEW_MESSAGE:
-      return {
-        ...state,
-        messages: state.messages.concat(action.payload),
-        loading: false,
-        error: null
-      };
-
     case FETCH_MESSAGES_BEGIN:
       return {
         ...state,

@@ -1,4 +1,3 @@
-export const ADD_NEW_MESSAGE = "ADD_NEW_MESSAGE";
 export const FETCH_MESSAGES_BEGIN = 'FETCH_MESSAGES_BEGIN';
 export const FETCH_MESSAGES_SUCCESS = 'FETCH_MESSAGES_SUCCESS';
 export const FETCH_MESSAGES_FAILURE = 'FETCH_MESSAGES_FAILURE';
@@ -7,6 +6,7 @@ export const addMessage = message => {
   return async dispatch => {
     dispatch(fetchMessagesBegin())
     return fetch("http://localhost:3000/messages", {
+        mode: 'cors',
         method: 'POST',
         body: JSON.stringify(message),
         headers: {
@@ -20,10 +20,6 @@ export const addMessage = message => {
       })
       .catch(error => dispatch(fetchMessagesFailure(error)));
   }
-  // return {
-  //   type: ADD_NEW_MESSAGE,
-  //   payload: message
-  // };
 };
 
 export const getMessages = () => {

@@ -3,6 +3,7 @@ export const FETCH_MESSAGES_SUCCESS = 'FETCH_MESSAGES_SUCCESS';
 export const DELETE_MESSAGE_COMPLETE = 'DELETE_MESSAGE_COMPLETE';
 export const FETCH_MESSAGES_FAILURE = 'FETCH_MESSAGES_FAILURE';
 export const NUKE_MESSAGE_COMPLETE = 'NUKE_MESSAGE_COMPLETE';
+export const EDIT_MESSAGES_SUCCESS = 'EDIT_MESSAGES_SUCCESS';
 
 const sleep = milliseconds => {
   //artificially sleep so we can see that beautiful spinner
@@ -63,6 +64,26 @@ export const nukeMessages = () => {
   };
 };
 
+export const editMessage = (editedMessage, uuid) => {
+  return async dispatch => {
+    dispatch(fetchMessagesBegin());
+    return fetch('http://localhost:3000/messages/' + uuid, {
+      method: 'PUT',
+      body: JSON.stringify(editedMessage),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+      .then(res => res.json())
+      .then(json => {
+        sleep(500).then(() => {
+          dispatch(editMessageSuccess(json, uuid));
+        });
+      })
+      .catch(error => dispatch(fetchMessagesFailure(error)));
+  };
+};
+
 export const fetchMessagesBegin = () => {
   return {
     type: FETCH_MESSAGES_BEGIN
@@ -74,6 +95,16 @@ export const fetchMessagesSuccess = messages => {
     type: FETCH_MESSAGES_SUCCESS,
     payload: {
       messages
+    }
+  };
+};
+
+export const editMessageSuccess = (message, uuid) => {
+  return {
+    type: EDIT_MESSAGES_SUCCESS,
+    payload: {
+      message,
+      uuid
     }
   };
 };

@@ -16,6 +16,7 @@ class MessagesContainer extends React.Component {
 
   handleClick = () => {
     this.props.nukeMessages();
+    alert('I told you not to click it...');
   };
 
   render() {

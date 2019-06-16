@@ -1,5 +1,6 @@
-import React from "react";
-import InfiniteScroll from "react-infinite-scroller";
+import React from 'react';
+import InfiniteScroll from 'react-infinite-scroller';
+import Loader from 'react-loader-spinner';
 
 class MoreDogs extends React.Component {
   constructor(props) {
@@ -12,10 +13,10 @@ class MoreDogs extends React.Component {
   }
 
   getNextDog = () => {
-    fetch("https://dog.ceo/api/breeds/image/random")
+    fetch('https://dog.ceo/api/breeds/image/random')
       .then(response => {
         if (response.status !== 200) {
-          console.log("Status Code: " + response.status);
+          console.log('Status Code: ' + response.status);
           return;
         }
 
@@ -32,8 +33,8 @@ class MoreDogs extends React.Component {
 
   render() {
     const loader = (
-      <div className="loader" key="loader-key">
-        Loading ...
+      <div className='loader' key='loader-key'>
+        <Loader type='Oval' color='#41d9f4' height='100' width='100' />
       </div>
     );
 
@@ -41,8 +42,8 @@ class MoreDogs extends React.Component {
 
     this.state.images.map((url, i) => {
       return dogs.push(
-        <div className="dog-image" key={i}>
-          <img src={url} alt="Dog" width="600" />
+        <div className='dog-image' key={i}>
+          <img src={url} alt='Dog' width='600' />
         </div>
       );
     });
@@ -55,7 +56,7 @@ class MoreDogs extends React.Component {
         loader={loader}
         threshold={1}
       >
-        <div className="never-ending-dogs">{dogs}</div>
+        <div className='never-ending-dogs'>{dogs}</div>
       </InfiniteScroll>
     );
   }

@@ -1,11 +1,11 @@
-import React from "react";
-import { connect } from "react-redux";
-import { addMessage } from "../actions";
+import React from 'react';
+import { connect } from 'react-redux';
+import { addMessage } from '../actions';
 
 class MessageInputBox extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { message: "", name: "" };
+    this.state = { message: '', name: '' };
   }
 
   handleMessageChange = e => {
@@ -18,20 +18,20 @@ class MessageInputBox extends React.Component {
 
   handleSubmit = e => {
     e.preventDefault();
-    if (this.state.message === "") {
-      alert("You really gotta say something...");
+    if (this.state.message === '') {
+      alert('You really gotta say something...');
       return;
     }
 
-    if (this.state.name === "") {
-      alert("You forgot your name?");
+    if (this.state.name === '') {
+      alert('You forgot your name?');
       return;
     }
 
-    alert("Did you know that this is what you wrote: " + this.state.message);
+    alert('Did you know that this is what you wrote: ' + this.state.message);
 
     let newMessage = {
-      timestamp: new Date() + "",
+      timestamp: new Date() + '',
       name: this.state.name,
       message: this.state.message
     };
@@ -39,30 +39,30 @@ class MessageInputBox extends React.Component {
     this.props.addMessage(newMessage);
 
     this.setState({
-      message: "",
-      name: ""
+      message: '',
+      name: ''
     });
   };
 
   render() {
     return (
-      <form onSubmit={this.handleSubmit} className="message-submit-container ">
-        <label className="message-form">
+      <form onSubmit={this.handleSubmit} className='message-submit-container '>
+        <label className='message-form'>
           Share a message:
           <input
-            type="text"
-            className="form-name"
-            placeholder="Name?"
+            type='text'
+            className='form-name'
+            placeholder='Name?'
             value={this.state.name}
             onChange={this.handleNameChange}
           />
           <textarea
-            className="message-content"
-            placeholder="Spill the beans..."
+            className='message-content'
+            placeholder='Spill the beans...'
             value={this.state.message}
             onChange={this.handleMessageChange}
           />
-          <input type="submit" value="Post" />
+          <input type='submit' value='Post' />
         </label>
       </form>
     );

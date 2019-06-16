@@ -1,9 +1,10 @@
-import { combineReducers } from "redux";
+import { combineReducers } from 'redux';
 import {
   FETCH_MESSAGES_BEGIN,
+  DELETE_MESSAGE_COMPLETE,
   FETCH_MESSAGES_SUCCESS,
   FETCH_MESSAGES_FAILURE
-} from "../actions/index.js";
+} from '../actions/index.js';
 
 const initialState = {
   messages: [],
@@ -20,6 +21,16 @@ const messageReducer = (state = initialState, action) => {
         error: null
       };
 
+    case DELETE_MESSAGE_COMPLETE:
+      return {
+        ...state,
+        loading: false,
+        error: null,
+        messages: state.messages.filter(
+          message => message.uuid !== action.payload.uuid
+        )
+      };
+
     case FETCH_MESSAGES_SUCCESS:
       return {
         ...state,
@@ -32,8 +43,7 @@ const messageReducer = (state = initialState, action) => {
       return {
         ...state,
         loading: false,
-        error: action.payload.error,
-        items: []
+        error: action.payload.error
       };
 
     default:

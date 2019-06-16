@@ -1,7 +1,8 @@
-import React from "react";
-import Message from "./Message.jsx";
-import { connect } from "react-redux";
-import { getMessages } from "../actions";
+import React from 'react';
+import Message from './Message.jsx';
+import { connect } from 'react-redux';
+import { getMessages } from '../actions';
+import Loader from 'react-loader-spinner';
 
 class MessagesContainer extends React.Component {
   constructor(props) {
@@ -17,17 +18,19 @@ class MessagesContainer extends React.Component {
     const { error, loading, messages } = this.props;
 
     if (error) {
-      return <div>Error! {error.message}</div>;
+      console.log(error);
     }
 
     if (loading) {
-      return <div>Loading...</div>;
+      return (
+        <Loader type='ThreeDots' color='#f441c1' height='100' width='100' />
+      );
     }
 
     return (
       <div>
         {messages.map((item, i) => (
-          <Message key={i} messageObj={item} />
+          <Message key={item.uuid} messageObj={item} />
         ))}
       </div>
     );

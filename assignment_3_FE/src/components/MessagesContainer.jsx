@@ -10,7 +10,7 @@ class MessagesContainer extends React.Component {
     this.state = {};
   }
 
-  componentWillMount() {
+  componentDidMount() {
     this.props.getMessages();
   }
 

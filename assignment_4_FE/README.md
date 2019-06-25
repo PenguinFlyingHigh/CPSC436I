@@ -11,3 +11,6 @@ React Redux Message List.
 - New data added into DB
 
 ## Bonus functionality:
+
+- Delete Messages
+- Edit Messages

@@ -1,9 +1,10 @@
-export const FETCH_MESSAGES_BEGIN = 'FETCH_MESSAGES_BEGIN';
-export const FETCH_MESSAGES_SUCCESS = 'FETCH_MESSAGES_SUCCESS';
-export const DELETE_MESSAGE_COMPLETE = 'DELETE_MESSAGE_COMPLETE';
-export const FETCH_MESSAGES_FAILURE = 'FETCH_MESSAGES_FAILURE';
-export const NUKE_MESSAGE_COMPLETE = 'NUKE_MESSAGE_COMPLETE';
-export const EDIT_MESSAGES_SUCCESS = 'EDIT_MESSAGES_SUCCESS';
+export const FETCH_MESSAGES_BEGIN = "FETCH_MESSAGES_BEGIN";
+export const FETCH_MESSAGES_SUCCESS = "FETCH_MESSAGES_SUCCESS";
+export const ADD_MESSAGES_SUCCESS = "ADD_MESSAGES_SUCCESS";
+export const DELETE_MESSAGE_COMPLETE = "DELETE_MESSAGE_COMPLETE";
+export const FETCH_MESSAGES_FAILURE = "FETCH_MESSAGES_FAILURE";
+export const NUKE_MESSAGE_COMPLETE = "NUKE_MESSAGE_COMPLETE";
+export const EDIT_MESSAGES_SUCCESS = "EDIT_MESSAGES_SUCCESS";
 
 const sleep = milliseconds => {
   //artificially sleep so we can see that beautiful spinner
@@ -13,17 +14,17 @@ const sleep = milliseconds => {
 export const addMessage = message => {
   return async dispatch => {
     dispatch(fetchMessagesBegin());
-    return fetch('http://localhost:3000/messages', {
-      method: 'POST',
+    return fetch("http://localhost:3000/messages", {
+      method: "POST",
       body: JSON.stringify(message),
       headers: {
-        'Content-Type': 'application/json'
+        "Content-Type": "application/json"
       }
     })
       .then(res => res.json())
       .then(json => {
         sleep(500).then(() => {
-          dispatch(fetchMessagesSuccess(json));
+          dispatch(addMessagesSuccess(json));
         });
       })
       .catch(error => dispatch(fetchMessagesFailure(error)));
@@ -33,7 +34,7 @@ export const addMessage = message => {
 export const getMessages = () => {
   return dispatch => {
     dispatch(fetchMessagesBegin());
-    return fetch('http://localhost:3000/messages')
+    return fetch("http://localhost:3000/messages")
       .then(res => res.json())
       .then(json => {
         dispatch(fetchMessagesSuccess(json));
@@ -45,8 +46,8 @@ export const getMessages = () => {
 export const deleteMessage = uuid => {
   return async dispatch => {
     dispatch(fetchMessagesBegin());
-    return fetch('http://localhost:3000/messages/' + uuid, {
-      method: 'DELETE'
+    return fetch("http://localhost:3000/messages/" + uuid, {
+      method: "DELETE"
     })
       .then(dispatch(deleteMessageComplete(uuid)))
       .catch(error => dispatch(fetchMessagesFailure(error)));
@@ -56,8 +57,8 @@ export const deleteMessage = uuid => {
 export const nukeMessages = () => {
   return async dispatch => {
     dispatch(fetchMessagesBegin());
-    return fetch('http://localhost:3000/messages', {
-      method: 'DELETE'
+    return fetch("http://localhost:3000/messages", {
+      method: "DELETE"
     })
       .then(dispatch(nukeMessagesComplete()))
       .catch(error => dispatch(fetchMessagesFailure(error)));
@@ -67,11 +68,11 @@ export const nukeMessages = () => {
 export const editMessage = (editedMessage, uuid) => {
   return async dispatch => {
     dispatch(fetchMessagesBegin());
-    return fetch('http://localhost:3000/messages/' + uuid, {
-      method: 'PUT',
+    return fetch("http://localhost:3000/messages/" + uuid, {
+      method: "PUT",
       body: JSON.stringify(editedMessage),
       headers: {
-        'Content-Type': 'application/json'
+        "Content-Type": "application/json"
       }
     })
       .then(res => res.json())
@@ -87,6 +88,15 @@ export const editMessage = (editedMessage, uuid) => {
 export const fetchMessagesBegin = () => {
   return {
     type: FETCH_MESSAGES_BEGIN
+  };
+};
+
+export const addMessagesSuccess = messages => {
+  return {
+    type: ADD_MESSAGES_SUCCESS,
+    payload: {
+      messages
+    }
   };
 };
 

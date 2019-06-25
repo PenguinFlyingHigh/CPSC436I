@@ -3,6 +3,7 @@ import {
   FETCH_MESSAGES_BEGIN,
   DELETE_MESSAGE_COMPLETE,
   FETCH_MESSAGES_SUCCESS,
+  ADD_MESSAGES_SUCCESS,
   FETCH_MESSAGES_FAILURE,
   NUKE_MESSAGE_COMPLETE,
   EDIT_MESSAGES_SUCCESS
@@ -55,12 +56,20 @@ const messageReducer = (state = initialState, action) => {
         error: null
       };
 
+    case ADD_MESSAGES_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        error: null,
+        messages: [action.payload.messages].concat(state.messages)
+      };
+
     case FETCH_MESSAGES_SUCCESS:
       return {
         ...state,
         loading: false,
         error: null,
-        messages: state.messages.concat(action.payload.messages)
+        messages: action.payload.messages.reverse()
       };
 
     case FETCH_MESSAGES_FAILURE:

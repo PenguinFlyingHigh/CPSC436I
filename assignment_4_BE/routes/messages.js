@@ -1,68 +1,80 @@
-var express = require('express');
+var express = require("express");
 var router = express.Router();
-const uuidv4 = require('uuid/v4');
+const uuidv4 = require("uuid/v4");
+const db = require("../db.js");
+const COLLECTION_NAME = "Messages";
 
-let messages = [
-  // you wouldn't store this in a list... you'd use a database
-  {
-    message: 'FROM THE BACKEND: This is one of those awesome messages.',
-    name: 'BE Jimmy',
-    timestamp: 'Tue May 21 2019 00:10:52 GMT-0700 (Pacific Daylight Time)',
-    uuid: 'd2b33931-6e60-4ba0-89bb-31639df87774'
-  },
-  {
-    message: 'FROM THE BACKEND: Oh look, another awesome message.',
-    name: 'BE Queen',
-    timestamp: 'Tue May 21 2019 00:10:52 GMT-0700 (Pacific Daylight Time)',
-    uuid: '5c7ce07f-024b-47f0-8d11-997c9b64bf77'
-  },
-  {
-    message: 'FROM THE BACKEND: Funny.',
-    name: 'BE Not',
-    timestamp: 'Tue May 21 2019 00:10:52 GMT-0700 (Pacific Daylight Time)',
-    uuid: '86699da0-cdb6-48da-950c-79aba08542b2'
-  }
-];
-
-router.get('/', function(req, res, next) {
-  res.json(messages);
+router.get("/", function(req, res, next) {
+  db.get()
+    .collection(COLLECTION_NAME)
+    .find()
+    .toArray()
+    .then(messages => {
+      res.json(messages);
+    });
 });
 
-router.post('/', function(req, res, next) {
+router.post("/", function(req, res, next) {
   req.body.uuid = uuidv4();
-  messages.push(req.body);
-  res.status(201).json(req.body);
+  db.get()
+    .collection(COLLECTION_NAME)
+    .insertOne(req.body, function(err, result) {
+      if (err) {
+        console.log(err);
+      }
+      res.status(201).json(result.ops[0]);
+    });
 });
 
-router.delete('/', function(req, res, next) {
-  messages = [];
-  console.log('What have you done...You deleted everything!');
-  res.status(204).send();
+router.delete("/", function(req, res, next) {
+  console.log("What have you done...You deleted everything!");
+  db.get()
+    .collection(COLLECTION_NAME)
+    .drop(function(err, result) {
+      if (err) {
+        console.log(err);
+      }
+      res.status(204).send();
+    });
 });
 
-router.put('/:uuid', function(req, res, next) {
+router.put("/:uuid", function(req, res, next) {
   //params format: messages/d2b33931-6e60-4ba0-89bb-31639df87774
-  let index = messages.findIndex(messages => messages.uuid === req.params.uuid);
-  if (index !== -1) {
-    let uuid = messages[index].uuid;
-    let newMessage = req.body;
-    newMessage.uuid = uuid;
-    messages[index] = newMessage;
-    res.json(messages[index]).send();
-  } else {
-    res.status(404).send();
-  }
+  db.get()
+    .collection(COLLECTION_NAME)
+    .findOneAndUpdate(
+      { uuid: req.params.uuid },
+      {
+        $set: {
+          message: req.body.message,
+          name: req.body.name,
+          timestamp: req.body.timestamp
+        }
+      },
+      { returnOriginal: false },
+      function(err, result) {
+        if (err) {
+          console.log(err);
+          res.status(404).send();
+        }
+
+        console.log(result);
+        res.json(result.value);
+      }
+    );
 });
 
-router.delete('/:uuid', function(req, res, next) {
+router.delete("/:uuid", function(req, res, next) {
   //params format: messages/d2b33931-6e60-4ba0-89bb-31639df87774
-  let index = messages.findIndex(messages => messages.uuid === req.params.uuid);
-  if (index !== -1) {
-    messages.splice(index, 1);
-    res.status(204).send();
-  } else {
-    res.status(404).send();
-  }
+  db.get()
+    .collection(COLLECTION_NAME)
+    .deleteOne({ uuid: req.params.uuid }, function(err, result) {
+      if (err) {
+        console.log(err);
+        res.status(404).send();
+      }
+      res.status(204).send();
+    });
 });
 
 module.exports = router;

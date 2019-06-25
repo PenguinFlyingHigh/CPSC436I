@@ -1,4 +1,4 @@
-import { combineReducers } from 'redux';
+import { combineReducers } from "redux";
 import {
   FETCH_MESSAGES_BEGIN,
   DELETE_MESSAGE_COMPLETE,
@@ -6,7 +6,7 @@ import {
   FETCH_MESSAGES_FAILURE,
   NUKE_MESSAGE_COMPLETE,
   EDIT_MESSAGES_SUCCESS
-} from '../actions/index.js';
+} from "../actions/index.js";
 
 const initialState = {
   messages: [],

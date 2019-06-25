@@ -1,12 +1,11 @@
-import React from 'react';
-import './App.css';
-import MessageInputBox from './MessageInputBox';
-import MessagesContainer from './MessagesContainer';
-import MoreDogs from './MoreDogs';
+import React from "react";
+import "./App.css";
+import MessageInputBox from "./MessageInputBox";
+import MessagesContainer from "./MessagesContainer";
 
 function App() {
   return (
-    <div className='App' id='container'>
+    <div className="App" id="container">
       <h1> Out Loud, NOW WITH A SERVER</h1>
       <h5>
         Have something on your mind ? Tell the world. Anonymously. Now
@@ -14,7 +13,6 @@ function App() {
       </h5>
       <MessageInputBox />
       <MessagesContainer />
-      <MoreDogs />
     </div>
   );
 }

@@ -6,6 +6,11 @@ export const FETCH_MESSAGES_FAILURE = "FETCH_MESSAGES_FAILURE";
 export const NUKE_MESSAGE_COMPLETE = "NUKE_MESSAGE_COMPLETE";
 export const EDIT_MESSAGES_SUCCESS = "EDIT_MESSAGES_SUCCESS";
 
+const api_url =
+  process.env.NODE_ENV === "production"
+    ? "https://server-dot-spilled-the-beans.appspot.com"
+    : "http://localhost:3000";
+
 const sleep = milliseconds => {
   //artificially sleep so we can see that beautiful spinner
   return new Promise(resolve => setTimeout(resolve, milliseconds));
@@ -14,7 +19,7 @@ const sleep = milliseconds => {
 export const addMessage = message => {
   return async dispatch => {
     dispatch(fetchMessagesBegin());
-    return fetch("http://localhost:3000/messages", {
+    return fetch(api_url + "/messages", {
       method: "POST",
       body: JSON.stringify(message),
       headers: {
@@ -34,7 +39,7 @@ export const addMessage = message => {
 export const getMessages = () => {
   return dispatch => {
     dispatch(fetchMessagesBegin());
-    return fetch("http://localhost:3000/messages")
+    return fetch(api_url + "/messages")
       .then(res => res.json())
       .then(json => {
         dispatch(fetchMessagesSuccess(json));
@@ -46,7 +51,7 @@ export const getMessages = () => {
 export const deleteMessage = uuid => {
   return async dispatch => {
     dispatch(fetchMessagesBegin());
-    return fetch("http://localhost:3000/messages/" + uuid, {
+    return fetch(api_url + "/messages/" + uuid, {
       method: "DELETE"
     })
       .then(dispatch(deleteMessageComplete(uuid)))
@@ -57,7 +62,7 @@ export const deleteMessage = uuid => {
 export const nukeMessages = () => {
   return async dispatch => {
     dispatch(fetchMessagesBegin());
-    return fetch("http://localhost:3000/messages", {
+    return fetch(api_url + "/messages", {
       method: "DELETE"
     })
       .then(dispatch(nukeMessagesComplete()))
@@ -68,7 +73,7 @@ export const nukeMessages = () => {
 export const editMessage = (editedMessage, uuid) => {
   return async dispatch => {
     dispatch(fetchMessagesBegin());
-    return fetch("http://localhost:3000/messages/" + uuid, {
+    return fetch(api_url + "/messages/" + uuid, {
       method: "PUT",
       body: JSON.stringify(editedMessage),
       headers: {
